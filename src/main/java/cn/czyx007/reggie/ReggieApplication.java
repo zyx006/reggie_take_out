@@ -14,6 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class ReggieApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ReggieApplication.class);
+        SpringApplication.run(ReggieApplication.class, args);
     }
 }
