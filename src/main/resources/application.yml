@@ -4,15 +4,17 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/reggie?serverTimezone=Asia/Shanghai
       username: root
-      password:
+#  redis:
+#    password:
+#      password:
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-reggie:
-  path:
+#reggie:
+#  path:
 
-email:
-  userName:
-  password:
+#email:
+#  userName:
+#  password:
