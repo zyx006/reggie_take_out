@@ -2,6 +2,7 @@ package cn.czyx007.reggie.common;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  * @createTime : 2022/12/19 - 23:32
  */
 @Data
-public class R<T> {
+public class R<T> implements Serializable {
     private Integer code; //状态码：1成功，0和其它数字为失败
 
     private String msg; //错误信息
