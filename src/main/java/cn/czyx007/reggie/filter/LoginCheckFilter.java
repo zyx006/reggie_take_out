@@ -1,8 +1,6 @@
 package cn.czyx007.reggie.filter;
 
 import cn.czyx007.reggie.common.BaseContext;
-import cn.czyx007.reggie.common.R;
-import com.alibaba.fastjson.JSON;
 import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.*;
@@ -57,6 +55,10 @@ public class LoginCheckFilter implements Filter {
             return;
         }
 
-        response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
+//        response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write("未登录！请先跳转以下页面登录<br>\n" +
+                "<a href=\"http://reggie.czyx007.cn/backend/page/login/login.html\">后台页面跳转</a><br>\n" +
+                "<a href=\"http://reggie.czyx007.cn/front/page/login.html\">用户页面跳转</a>");
     }
 }
