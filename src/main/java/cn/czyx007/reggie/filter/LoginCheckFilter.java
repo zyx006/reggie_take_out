@@ -1,10 +1,8 @@
 package cn.czyx007.reggie.filter;
 
-import cn.czyx007.reggie.bean.Employee;
 import cn.czyx007.reggie.common.BaseContext;
 import cn.czyx007.reggie.common.R;
 import com.alibaba.fastjson.JSON;
-import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.*;
@@ -21,8 +19,8 @@ import java.io.IOException;
 @WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*")
 public class LoginCheckFilter implements Filter {
     private static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
-    public static final String[] urls = {"/employee/login", "/employee/logout", "/backend/**", "/front/**",
-            "/user/sendMsg", "/user/login"};
+    private static final String[] urls = {"/employee/login", "/employee/logout", "/backend/**", "/front/**",
+            "/user/sendMsg", "/user/login", "/doc.html", "/webjars/**", "/swagger-resources", "/v2/api-docs"};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
