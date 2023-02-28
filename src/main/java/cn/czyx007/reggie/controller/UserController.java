@@ -3,6 +3,8 @@ package cn.czyx007.reggie.controller;
 import cn.czyx007.reggie.bean.User;
 import cn.czyx007.reggie.common.R;
 import cn.czyx007.reggie.service.UserService;
+import cn.czyx007.reggie.utils.SendEmailUtils;
+import cn.czyx007.reggie.utils.ValidateCodeUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -39,12 +41,12 @@ public class UserController {
         String phone = user.getPhone();
         if (StringUtils.hasLength(phone)) {
             //生成随机的4位验证码
-            //String code = ValidateCodeUtils.generateValidateCode4String(4);
+            String code = ValidateCodeUtils.generateValidateCode4String(4);
             //发送邮件验证码
-            //SendEmailUtils.sendAuthCodeEmail(phone, code);
+            SendEmailUtils.sendAuthCodeEmail(phone, code);
             //将生成的验证码保存到Redis用于校验，并且设置有效期为5分钟
-//            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
-            redisTemplate.opsForValue().set(phone, "1234", 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
+//            redisTemplate.opsForValue().set(phone, "1234", 5, TimeUnit.MINUTES);
             return R.success("验证码发送成功");
         }
         return R.error("验证码发送失败");
@@ -59,7 +61,7 @@ public class UserController {
         //从Redis中获取保存的验证码
         String codeInRedis = redisTemplate.opsForValue().get(phone);
 
-        codeInRedis = "1234";
+        //codeInRedis = "1234";
 
         //将两个验证码进行比对
         if(StringUtils.hasLength(codeInRedis) && codeInRedis.equals(code)){
